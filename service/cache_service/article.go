@@ -7,9 +7,10 @@ import (
 	"github.com/EDDYCJY/go-gin-example/pkg/e"
 )
 
+// Article 定义Article 结构体类型
 type Article struct {
-	ID    int
-	TagID int
+	ID    int //文章ID
+	TagID int //文章的TagID
 	State int
 
 	PageNum  int
@@ -18,6 +19,7 @@ type Article struct {
 
 func (a *Article) GetArticleKey() string {
 	return e.CACHE_ARTICLE + "_" + strconv.Itoa(a.ID)
+	//	ARTICLE_+int转换成字符串类型
 }
 
 func (a *Article) GetArticlesKey() string {

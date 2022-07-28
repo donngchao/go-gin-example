@@ -13,6 +13,7 @@ import (
 
 var db *gorm.DB
 
+// Model 定义Model结构体类型
 type Model struct {
 	ID         int `gorm:"primary_key" json:"id"`
 	CreatedOn  int `json:"created_on"`
@@ -23,6 +24,8 @@ type Model struct {
 // Setup initializes the database instance
 func Setup() {
 	var err error
+	// 通过gorm 连接数据库
+	//  db, err := gorm.Open("mysql", "user:password@(localhost)/dbname?charset=utf8mb4&parseTime=True&loc=Local")
 	db, err = gorm.Open(setting.DatabaseSetting.Type, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		setting.DatabaseSetting.User,
 		setting.DatabaseSetting.Password,
@@ -33,6 +36,14 @@ func Setup() {
 		log.Fatalf("models.Setup err: %v", err)
 	}
 
+	/**
+	通过gorm修改默认的表名
+	gorm.DefaultTableNameHandler = func (db *gorm.DB, defaultTableName string) string  {
+	  return "prefix_" + defaultTableName;
+	}
+	这里的表名称前缀是blog_
+
+	*/
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
 		return setting.DatabaseSetting.TablePrefix + defaultTableName
 	}

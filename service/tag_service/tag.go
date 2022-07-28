@@ -17,6 +17,7 @@ import (
 	"github.com/EDDYCJY/go-gin-example/service/cache_service"
 )
 
+// Tag 定义Tag结构体类型
 type Tag struct {
 	ID         int
 	Name       string

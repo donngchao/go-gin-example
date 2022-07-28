@@ -11,12 +11,13 @@ import (
 	"github.com/EDDYCJY/go-gin-example/pkg/gredis"
 	"github.com/EDDYCJY/go-gin-example/pkg/logging"
 	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-	"github.com/EDDYCJY/go-gin-example/routers"
 	"github.com/EDDYCJY/go-gin-example/pkg/util"
+	"github.com/EDDYCJY/go-gin-example/routers"
 )
 
 func init() {
 	setting.Setup()
+	// 初始化数据库设置
 	models.Setup()
 	logging.Setup()
 	gredis.Setup()
@@ -37,7 +38,7 @@ func main() {
 	writeTimeout := setting.ServerSetting.WriteTimeout
 	endPoint := fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
 	maxHeaderBytes := 1 << 20
-
+	// 初始化http server配置
 	server := &http.Server{
 		Addr:           endPoint,
 		Handler:        routersInit,
@@ -48,7 +49,7 @@ func main() {
 
 	log.Printf("[info] start http server listening %s", endPoint)
 
-	server.ListenAndServe()
+	server.ListenAndServe() //启动http server
 
 	// If you want Graceful Restart, you need a Unix system and download github.com/fvbock/endless
 	//endless.DefaultReadTimeOut = readTimeout

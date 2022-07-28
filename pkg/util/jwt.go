@@ -8,6 +8,7 @@ import (
 
 var jwtSecret []byte
 
+// Claims 声明Claims结构体类型
 type Claims struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
@@ -17,7 +18,7 @@ type Claims struct {
 // GenerateToken generate tokens used for auth
 func GenerateToken(username, password string) (string, error) {
 	nowTime := time.Now()
-	expireTime := nowTime.Add(3 * time.Hour)
+	expireTime := nowTime.Add(24 * time.Hour)
 
 	claims := Claims{
 		EncodeMD5(username),
@@ -34,6 +35,7 @@ func GenerateToken(username, password string) (string, error) {
 	return token, err
 }
 
+// 解析token是否有效
 // ParseToken parsing token
 func ParseToken(token string) (*Claims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {

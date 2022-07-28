@@ -53,7 +53,7 @@ func Set(key string, data interface{}, time int) error {
 	if err != nil {
 		return err
 	}
-
+	//Redis Expire 命令用于设置 key 的过期时间，key 过期后将不再可用。单位以秒计
 	_, err = conn.Do("EXPIRE", key, time)
 	if err != nil {
 		return err

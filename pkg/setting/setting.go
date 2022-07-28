@@ -7,6 +7,7 @@ import (
 	"github.com/go-ini/ini"
 )
 
+// App 定义结构体App
 type App struct {
 	JwtSecret string
 	PageSize  int
@@ -28,6 +29,7 @@ type App struct {
 	TimeFormat  string
 }
 
+// AppSetting 定义空结构体
 var AppSetting = &App{}
 
 type Server struct {
@@ -50,6 +52,7 @@ type Database struct {
 
 var DatabaseSetting = &Database{}
 
+// Redis 定义Redis结构体类型
 type Redis struct {
 	Host        string
 	Password    string
@@ -62,6 +65,7 @@ var RedisSetting = &Redis{}
 
 var cfg *ini.File
 
+// Setup 初始化项目相关配置
 // Setup initialize the configuration instance
 func Setup() {
 	var err error

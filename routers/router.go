@@ -26,13 +26,13 @@ func InitRouter() *gin.Engine {
 	r.StaticFS("/export", http.Dir(export.GetExcelFullPath()))
 	r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
 	r.StaticFS("/qrcode", http.Dir(qrcode.GetQrCodeFullPath()))
-
+	// 通过认证，获取token
 	r.POST("/auth", api.GetAuth)
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.POST("/upload", api.UploadImage)
 
 	apiv1 := r.Group("/api/v1")
-	apiv1.Use(jwt.JWT())
+	apiv1.Use(jwt.JWT()) //如下的所有接口都需要进行认证
 	{
 		//获取标签列表
 		apiv1.GET("/tags", v1.GetTags)

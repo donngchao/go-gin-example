@@ -1,5 +1,6 @@
 package e
 
+// 定义状态码
 const (
 	SUCCESS        = 200
 	ERROR          = 500

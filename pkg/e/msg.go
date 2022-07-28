@@ -1,5 +1,6 @@
 package e
 
+// MsgFlags 定义状态码对应的字符串含义，定义到map变量MsgFlags
 var MsgFlags = map[int]string{
 	SUCCESS:                         "ok",
 	ERROR:                           "fail",
@@ -39,5 +40,5 @@ func GetMsg(code int) string {
 		return msg
 	}
 
-	return MsgFlags[ERROR]
+	return MsgFlags[ERROR] // 如果MsgFlags[code]无法返回对应的字符串，则这里返回的是字符串"fail"
 }
